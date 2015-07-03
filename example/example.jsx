@@ -7,17 +7,15 @@ let model = {
   followers: 3
 };
 
-let schema = ["title", {"meta": ["user", "followers"]}];
+let context = "main";
+let schema = {[context]: ["title", {"meta": ["user", "followers"]}]};
 
 class Example extends React.Component {
 
   render() {
     return (
-      <section>
-        <Card model={ model } schema={ schema }>
-          <p>Hello World</p>
-        </Card>
-      </section>
+      <Card model={ model } context={ context } schema={ schema }>
+      </Card>
     );
   }
 }
