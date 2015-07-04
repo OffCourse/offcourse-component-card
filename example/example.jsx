@@ -15,6 +15,8 @@ class Example extends React.Component {
   render() {
     return (
       <Card model={ model } context={ context } schema={ schema }>
+        <p>HELLO WORLD</p>
+        <p>HELLO WORLD</p>
       </Card>
     );
   }

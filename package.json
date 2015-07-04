@@ -18,6 +18,8 @@
     "classnames": "^2.1.2",
     "lodash": "^3.10.0",
     "offcourse-component-card-content": "0.0.4",
+    "offcourse-component-card-footer": "0.0.1",
+    "offcourse-component-card-header": "0.0.1",
     "offcourse-component-card-section": "0.0.2",
     "offcourse-helpers-card-component": "0.0.1",
     "ramda": "^0.15.1",
