@@ -2,13 +2,11 @@ import React from "react";
 import Card from "../src/index.jsx";
 
 let model = {
-  title: "Bla di Bla",
-  user: "Al Dentist",
-  followers: 3
+  title: "Bla di Bla"
 };
 
 let context = "main";
-let schema = {[context]: ["title", {"meta": ["user", "followers"]}]};
+let schema = {[context]: ["title"]};
 
 class Example extends React.Component {
 
