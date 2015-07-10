@@ -46,11 +46,7 @@ class Card extends React.Component {
 Card.defaultProps = {};
 
 Card.propTypes = {
-  model: React.PropTypes.object.isRequired,
-  schema: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.array
-  ]).isRequired
+  model: React.PropTypes.object.isRequired
 };
 
 export default Card;
