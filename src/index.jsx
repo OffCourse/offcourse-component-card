@@ -29,13 +29,14 @@ class Card extends React.Component {
   }
 
   render() {
-    const { model, schema, context, selectModel, children } = this.props;
+    const { model, context, selectModel, children } = this.props;
+    const schema = model.schema[context] || model.schema;
     const [ image, buttons ] = this.splitChildren(children);
 
     return (
       <section className={ this.classes() }>
         { image && <CardHeader image={ image }></CardHeader> }
-        <CardContent schema={ schema[context] || schema } model={ model }/>
+        <CardContent schema={ schema } model={ model }/>
         { buttons && <CardFooter buttons={ buttons }></CardFooter> }
       </section>
     );
