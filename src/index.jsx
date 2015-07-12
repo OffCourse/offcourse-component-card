@@ -1,13 +1,16 @@
 import React from "react";
+import R from "ramda";
 import classnames from "classnames";
-import CardHeader from "offcourse-component-card-header";
-import CardContent from "offcourse-component-card-content";
-import CardFooter from "offcourse-component-card-footer";
+
+import CardHelpers from "offcourse-helpers-card-component";
+import CardSection from "offcourse-component-card-section";
 
 class Card extends React.Component {
 
   constructor(props){
     super(props);
+    const helpers = new CardHelpers();
+    this.partition = helpers.partition;
     this.name = "card";
   }
 
@@ -20,24 +23,19 @@ class Card extends React.Component {
     });
   }
 
-  splitChildren(children){
-    if(children && Array.isArray(children)){
-      const [head, ...tail] = children;
-      return [ head, tail ];
-    }
-    return [ children ];
+  createSections(schema, model){
+    const partitions = this.partition(schema, model);
+    return R.mapIndexed((partition, index) => (
+      <CardSection key={ index } section={ partition }/>
+    ), partitions);
   }
 
   render() {
-    const { model, context, selectModel, children } = this.props;
-    const schema = model.schema[context] || model.schema;
-    const [ image, buttons ] = this.splitChildren(children);
-
+    const { model, schema } = this.props;
+    const sections = this.createSections(schema, model);
     return (
       <section className={ this.classes() }>
-        { image && <CardHeader image={ image }></CardHeader> }
-        <CardContent schema={ schema } model={ model }/>
-        { buttons && <CardFooter buttons={ buttons }></CardFooter> }
+        { sections }
       </section>
     );
   }
@@ -46,7 +44,9 @@ class Card extends React.Component {
 Card.defaultProps = {};
 
 Card.propTypes = {
-  model: React.PropTypes.object.isRequired
+  model: React.PropTypes.object.isRequired,
+  schema: React.PropTypes.array.isRequired,
+  context: React.PropTypes.string
 };
 
 export default Card;
