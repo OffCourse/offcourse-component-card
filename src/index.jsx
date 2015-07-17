@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import R from "ramda";
 import classnames from "classnames";
 
@@ -23,16 +23,16 @@ class Card extends React.Component {
     });
   }
 
-  createSections(schema, model){
-    const partitions = this.partition(schema, model);
+  createSections(){
+    const { model, schema, components, handlers } = this.props;
+    const partitions = this.partition(schema, model, components, handlers);
     return R.mapIndexed((partition, index) => (
       <CardSection key={ index } section={ partition }/>
     ), partitions);
   }
 
   render() {
-    const { model, schema } = this.props;
-    const sections = this.createSections(schema, model);
+    const sections = this.createSections();
     return (
       <section className={ this.classes() }>
         { sections }
@@ -44,9 +44,11 @@ class Card extends React.Component {
 Card.defaultProps = {};
 
 Card.propTypes = {
-  model: React.PropTypes.object.isRequired,
-  schema: React.PropTypes.array.isRequired,
-  context: React.PropTypes.string
+  model: PropTypes.object.isRequired,
+  schema: PropTypes.array.isRequired,
+  context: PropTypes.string,
+  components: PropTypes.object,
+  handlers: PropTypes.object
 };
 
 export default Card;
