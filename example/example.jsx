@@ -2,12 +2,17 @@ import React from "react";
 import Card from "../src/index.jsx";
 import TodoList from "offcourse-component-todolist";
 
-class Map extends React.Component {
+class TodoContainer extends React.Component {
   render(){
-    const { map } = this.props;
+    const { data, handlers } = this.props;
+    const { foobar } = data;
+    const { handleClick } = handlers;
     return (
-      <div>{ map }</div>
-    );
+      <TodoList
+        handleTitleClick={ handleClick.bind(this, "title") }
+        handleCheckboxClick={ handleClick.bind(this, "checkbox") }
+        collection={ foobar }/>
+     );
   }
 }
 
@@ -17,14 +22,16 @@ let model = {
   curator: "Bla Bla Bla",
   foobar: [{title: "Do This"}, {title: "Then That"}, {title: "Finally This"}]
 };
-let handlers = {};
+
+let h = {
+  handleClick(msg){ console.log(msg); }
+};
 
 let schema = {
-  map: { fields: "foobar", component: TodoList },
   title: {},
   meta: { fields: ["curator", "followers"] },
-  todo: { fields: { foobar: "collection" }, component: Map, handlers: handlers },
-  list: { fields: { foobar: "collection" } }
+  list: { fields: { foobar: "data" } },
+  todo: { fields: { foobar: "" }, component: TodoContainer, handlers: h }
 };
 
 class Example extends React.Component {

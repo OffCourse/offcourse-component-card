@@ -1,7 +1,6 @@
 import React, { PropTypes } from "react";
 import R from "ramda";
 import classnames from "classnames";
-
 import CardHelpers from "offcourse-helpers-card-component";
 import CardSection from "offcourse-component-card-section";
 
@@ -24,11 +23,9 @@ class Card extends React.Component {
   }
 
   createSections(){
-    const { model, schema, components, handlers } = this.props;
-    console.log(components);
-    const partitions = this.partition(schema, model, components, handlers);
+    const { model, schema } = this.props;
+    const partitions = this.partition(schema, model);
     return R.mapIndexed((partition, index) => {
-      console.log(partition);
       return <CardSection key={ index } {...partition}/>;
     }, partitions);
   }
