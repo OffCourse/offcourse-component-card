@@ -1,20 +1,31 @@
 import React from "react";
 import Card from "../src/index.jsx";
+import TodoList from "offcourse-component-todolist";
 
 class Map extends React.Component {
   render(){
-    return <div>Hello World</div>;
+    const { map } = this.props;
+    return (
+      <div>{ map }</div>
+    );
   }
 }
 
 let model = {
-  map: Map,
+  map: "Hello",
   title: "Bla di Bla",
-  curator: "Bla Bla Bla"
+  curator: "Bla Bla Bla",
+  foobar: [{title: "Do This"}, {title: "Then That"}, {title: "Finally This"}]
 };
+let handlers = {};
 
-
-let schema = ["map", "title", {meta: ["curator", "followers"]}];
+let schema = {
+  map: { fields: "foobar", component: TodoList },
+  title: {},
+  meta: { fields: ["curator", "followers"] },
+  todo: { fields: { foobar: "collection" }, component: Map, handlers: handlers },
+  list: { fields: { foobar: "collection" } }
+};
 
 class Example extends React.Component {
 

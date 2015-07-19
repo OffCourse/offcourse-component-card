@@ -25,10 +25,12 @@ class Card extends React.Component {
 
   createSections(){
     const { model, schema, components, handlers } = this.props;
+    console.log(components);
     const partitions = this.partition(schema, model, components, handlers);
-    return R.mapIndexed((partition, index) => (
-      <CardSection key={ index } section={ partition }/>
-    ), partitions);
+    return R.mapIndexed((partition, index) => {
+      console.log(partition);
+      return <CardSection key={ index } {...partition}/>;
+    }, partitions);
   }
 
   render() {
@@ -45,7 +47,7 @@ Card.defaultProps = {};
 
 Card.propTypes = {
   model: PropTypes.object.isRequired,
-  schema: PropTypes.array.isRequired,
+  schema: PropTypes.object.isRequired,
   context: PropTypes.string,
   components: PropTypes.object,
   handlers: PropTypes.object

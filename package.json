@@ -17,8 +17,8 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "lodash": "^3.10.0",
-    "offcourse-component-card-section": "0.0.6",
-    "offcourse-helpers-card-component": "0.0.7",
+    "offcourse-component-card-section": "^0.1.0",
+    "offcourse-helpers-card-component": "^0.1.0",
     "ramda": "^0.15.1",
     "react": "^0.13.3"
   },
@@ -29,8 +29,8 @@
     "babel-eslint": "^3.1.14",
     "babel-loader": "^5.1.4",
     "chai": "^3.0.0",
-    "css-loader": "^0.9.1",
     "coffee-script": "^1.9.3",
+    "css-loader": "^0.9.1",
     "eslint": "^0.22.1",
     "eslint-loader": "^0.12.0",
     "eslint-plugin-react": "^2.5.0",
@@ -42,6 +42,7 @@
     "mockery": "^1.4.0",
     "node-libs-browser": "^0.5.2",
     "node-static": "^0.7.6",
+    "offcourse-component-todolist": "0.0.7",
     "offcourse-styles": "0.0.2",
     "react-hot-loader": "^1.2.7",
     "sinon": "^1.15.1",
