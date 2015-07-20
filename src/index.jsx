@@ -44,7 +44,7 @@ Card.defaultProps = {};
 
 Card.propTypes = {
   model: PropTypes.object.isRequired,
-  schema: PropTypes.object.isRequired,
+  schema: PropTypes.array.isRequired,
   context: PropTypes.string,
   components: PropTypes.object,
   handlers: PropTypes.object

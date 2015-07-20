@@ -27,12 +27,12 @@ let h = {
   handleClick(msg){ console.log(msg); }
 };
 
-let schema = {
-  title: {},
-  meta: { fields: ["curator", "followers"] },
-  list: { fields: { foobar: "data" } },
-  todo: { fields: { foobar: "" }, component: TodoContainer, handlers: h }
-};
+let schema = [
+  { type: "title" },
+  { type: "meta", fields: ["curator", "followers"] },
+  { type: "list", fields: { foobar: "data" } },
+  { type: "todo", fields: { foobar: "" }, component: TodoContainer, handlers: h }
+];
 
 class Example extends React.Component {
 
