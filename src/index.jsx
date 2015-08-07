@@ -5,6 +5,15 @@ import CardHelpers from "offcourse-helpers-card-component";
 import CardSection from "offcourse-component-card-section";
 
 class Card extends React.Component {
+ static defaultProps = {};
+
+  static propTypes = {
+    model: PropTypes.object.isRequired,
+    schema: PropTypes.array.isRequired,
+    context: PropTypes.string,
+    components: PropTypes.object,
+    handlers: PropTypes.object
+  };
 
   constructor(props){
     super(props);
@@ -25,9 +34,9 @@ class Card extends React.Component {
   createSections(){
     const { model, schema } = this.props;
     const partitions = this.partition(schema, model);
-    return R.mapIndexed((partition, index) => {
-      return <CardSection key={ index } {...partition}/>;
-    }, partitions);
+    return R.mapIndexed((partition, index) => (
+      <CardSection key={ index } {...partition}/>
+    ), partitions);
   }
 
   render() {
@@ -39,15 +48,5 @@ class Card extends React.Component {
     );
   }
 }
-
-Card.defaultProps = {};
-
-Card.propTypes = {
-  model: PropTypes.object.isRequired,
-  schema: PropTypes.array.isRequired,
-  context: PropTypes.string,
-  components: PropTypes.object,
-  handlers: PropTypes.object
-};
 
 export default Card;

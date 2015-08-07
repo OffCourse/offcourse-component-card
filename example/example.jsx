@@ -1,44 +1,78 @@
 import React from "react";
 import Card from "../src/index.jsx";
 import TodoList from "offcourse-component-todolist";
+import Radium from "radium";
 
 class TodoContainer extends React.Component {
   render(){
     const { data, handlers } = this.props;
     const { foobar } = data;
-    const { handleClick } = handlers;
+    const { handleHover, handleClick, handleComplete } = handlers;
     return (
       <TodoList
-        handleTitleClick={ handleClick.bind(this, "title") }
-        handleCheckboxClick={ handleClick.bind(this, "checkbox") }
+        handleTitleClick={ handleClick }
+        handleCheckboxClick={ handleComplete }
+        handleHover={ handleHover }
         collection={ foobar }/>
      );
   }
 }
 
-let model = {
+let aModel = {
   map: "Hello",
   title: "Bla di Bla",
   curator: "Bla Bla Bla",
-  foobar: [{title: "Do This"}, {title: "Then That"}, {title: "Finally This"}]
+  summary: "Lorem Ipsum Bla di Bla",
+  foobar: [{id: 0, title: "Do This"}, {id: 1, title: "Then That"}, {id: 2, title: "Finally This"}]
 };
 
-let h = {
-  handleClick(msg){ console.log(msg); }
+let styles = {
+  width: "300px",
+  margin: "30px",
+  border: "1px solid black"
 };
 
-let schema = [
-  { type: "title" },
-  { type: "meta", fields: ["curator", "followers"] },
-  { type: "list", fields: { foobar: "data" } },
-  { type: "todo", fields: { foobar: "" }, component: TodoContainer, handlers: h }
-];
-
+@Radium
 class Example extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = { model: aModel };
+    this.handlers = {
+      handleHover: this.handleHover.bind(this),
+      handleComplete: this.handleComplete.bind(this),
+      handleClick: this.handleClick.bind(this)
+    };
+  }
+
+  schema(){
+    return [
+      { type: "title" },
+      { type: "meta", fields: ["curator", "followers"] },
+      { type: "summary"},
+      { type: "todo", fields: { foobar: "" }, component: TodoContainer, handlers: this.handlers }
+    ];
+  }
+
+  handleHover(id){
+    const { model } = this.state;
+    model.foobar[id].highlight = !model.foobar[id].highlight;
+    this.setState({model});
+  }
+
+  handleComplete(id){
+    const { model } = this.state;
+    model.foobar[id].complete = !model.foobar[id].complete;
+    this.setState({model});
+  }
+
+  handleClick(msg){ console.log(msg); }
 
   render() {
+    const { model } = this.state;
     return (
-      <Card model={ model } schema={ schema }/>
+      <div style={ [styles] }>
+        <Card model={ model } schema={ this.schema() }/>
+      </div>
     );
   }
 }
